@@ -1,5 +1,5 @@
 import ReactSkinview3d from "react-skinview3d";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const App = () => {
   const totalImages = 230; // Tổng số skin
@@ -14,19 +14,30 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageInput, setPageInput] = useState(1);
   const [capeEnabled, setCapeEnabled] = useState(Array(totalImages).fill(false)); // Mảng theo dõi cape cho mỗi skin
+  const [searchTerm, setSearchTerm] = useState("");
 
   const totalPages = Math.ceil(skinUrls.length / imagesPerPage);
-  const currentImages = skinUrls.slice((currentPage - 1) * imagesPerPage, currentPage * imagesPerPage);
+  const currentImages = skinUrls
+    .filter((url) => url.toLowerCase().includes(searchTerm.toLowerCase())) // Tìm kiếm qua tên skin
+    .slice((currentPage - 1) * imagesPerPage, currentPage * imagesPerPage);
 
   // Cập nhật trang khi nhập số trang
-  const handlePageChange = (event) => {
-    const value = event.target.value;
-    const page = Math.max(1, Math.min(totalPages, parseInt(value) || 1));
-    setPageInput(page);
+  const handlePageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    let value = event.target.value;
+    value = value.trim();
+
+    // Nếu giá trị là số hợp lệ, cập nhật số trang
+    if (value && !isNaN(Number(value))) {
+      const page = Math.max(1, Math.min(totalPages, parseInt(value) || 1));
+      setPageInput(page);
+      setCurrentPage(page);
+    } else {
+      setPageInput(1); // Nếu không phải số hợp lệ, đặt lại về trang 1
+    }
   };
 
   // Hàm chuyển đổi cape cho từng skin
-  const toggleCape = (index) => {
+  const toggleCape = (index: number) => {
     setCapeEnabled((prev) => {
       const newCapeEnabled = [...prev];
       newCapeEnabled[index] = !newCapeEnabled[index];
@@ -36,6 +47,22 @@ const App = () => {
 
   return (
     <div>
+      {/* Tìm kiếm */}
+      <div style={{ textAlign: "center", marginBottom: "20px" }}>
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Tìm kiếm skin..."
+          style={{
+            padding: "5px",
+            width: "200px",
+            textAlign: "center",
+            margin: "10px",
+          }}
+        />
+      </div>
+
       <div
         style={{
           display: "grid",

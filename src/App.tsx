@@ -2,41 +2,39 @@ import ReactSkinview3d from "react-skinview3d";
 import React, { useState } from "react";
 
 const App = () => {
-  const totalImages = 230; // Tổng số skin
-  const imagesPerPage = 6; // Số lượng skin mỗi trang
+  const totalImages = 230;
+  const imagesPerPage = 6;
   const skinUrls = [];
-
-  // Tạo URL cho các skin từ 1 đến 230
   for (let i = 1; i <= totalImages; i++) {
     skinUrls.push(`/textures/skin/${i}.png`);
   }
 
   const [currentPage, setCurrentPage] = useState(1);
   const [pageInput, setPageInput] = useState(1);
-  const [capeEnabled, setCapeEnabled] = useState(Array(totalImages).fill(false)); // Mảng theo dõi cape cho mỗi skin
+  const [capeEnabled, setCapeEnabled] = useState(Array(totalImages).fill(false));
   const [searchTerm, setSearchTerm] = useState("");
 
   const totalPages = Math.ceil(skinUrls.length / imagesPerPage);
   const currentImages = skinUrls
-    .filter((url) => url.toLowerCase().includes(searchTerm.toLowerCase())) // Tìm kiếm qua tên skin
+    .filter((url) => url.toLowerCase().includes(searchTerm.toLowerCase()))
     .slice((currentPage - 1) * imagesPerPage, currentPage * imagesPerPage);
 
-  // Cập nhật trang khi nhập số trang
+
   const handlePageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let value = event.target.value;
     value = value.trim();
 
-    // Nếu giá trị là số hợp lệ, cập nhật số trang
+
     if (value && !isNaN(Number(value))) {
       const page = Math.max(1, Math.min(totalPages, parseInt(value) || 1));
       setPageInput(page);
       setCurrentPage(page);
     } else {
-      setPageInput(1); // Nếu không phải số hợp lệ, đặt lại về trang 1
+      setPageInput(1); 
     }
   };
 
-  // Hàm chuyển đổi cape cho từng skin
+
   const toggleCape = (index: number) => {
     setCapeEnabled((prev) => {
       const newCapeEnabled = [...prev];
@@ -95,7 +93,7 @@ const App = () => {
               capeUrl={capeEnabled[(currentPage - 1) * imagesPerPage + index] ? "/textures/mojang-classic-cape.png" : ""} // Sử dụng cape cho skin hiện tại
             />
             <button
-              onClick={() => toggleCape((currentPage - 1) * imagesPerPage + index)} // Chỉ bật/tắt cape cho skin hiện tại
+              onClick={() => toggleCape((currentPage - 1) * imagesPerPage + index)}
               style={{
                 position: "absolute",
                 top: "10px",
@@ -129,8 +127,6 @@ const App = () => {
           </div>
         ))}
       </div>
-
-      {/* Nút điều khiển trang */}
       <div style={{ textAlign: "center", marginTop: "20px" }}>
         <button
           onClick={() => setCurrentPage(currentPage - 1)}

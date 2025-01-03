@@ -1,5 +1,6 @@
 import ReactSkinview3d from "react-skinview3d";
 import React, { useState } from "react";
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 const App = () => {
   const totalImages = 230;

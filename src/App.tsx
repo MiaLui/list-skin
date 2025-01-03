@@ -1,6 +1,6 @@
 import ReactSkinview3d from "react-skinview3d";
 import React, { useState } from "react";
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 const App = () => {
   const totalImages = 230;
@@ -39,6 +39,7 @@ const App = () => {
       setCurrentPage(pageNumber);
     }
   };
+
   const toggleCape = (index: number) => {
     setCapeEnabled((prev) => {
       const newCapeEnabled = [...prev];
@@ -120,34 +121,35 @@ const App = () => {
           opacity: 1,
         }}
       />
-       {/* Nút và tiêu đề MIA-SKIN */}
-       <div
-  style={{
-    position: "absolute",
-    top: "60px", // Để nút xuất hiện trên cùng của box
-    left: "50%",
-    transform: "translateX(-50%)",
-    backgroundColor: "#FF7E5F",
-    padding: "10px 20px",
-    borderRadius: "30px",
-    color: "white",
-    fontWeight: "bold",
-    cursor: "pointer",
-    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
-    transition: "background-color 0.3s ease, transform 0.1s ease", // Thêm hiệu ứng khi hover và click
-  }}
-  onMouseEnter={(e) => {
-    const target = e.target as HTMLDivElement;
-    target.style.backgroundColor = "#800080"; // Đổi màu sang tím khi hover
-  }}
-  onMouseLeave={(e) => {
-    const target = e.target as HTMLDivElement;
-    target.style.backgroundColor = "#FF7E5F"; // Đổi lại màu ban đầu khi không hover
-  }}
->
-  MIA-SKIN
-</div>
-      
+
+      {/* Nút và tiêu đề MIA-SKIN */}
+      <div
+        style={{
+          position: "absolute",
+          top: "60px", // Để nút xuất hiện trên cùng của box
+          left: "50%",
+          transform: "translateX(-50%)",
+          backgroundColor: "#FF7E5F",
+          padding: "10px 20px",
+          borderRadius: "30px",
+          color: "white",
+          fontWeight: "bold",
+          cursor: "pointer",
+          boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
+          transition: "background-color 0.3s ease, transform 0.1s ease", // Thêm hiệu ứng khi hover và click
+        }}
+        onMouseEnter={(e) => {
+          const target = e.target as HTMLDivElement;
+          target.style.backgroundColor = "#800080"; // Đổi màu sang tím khi hover
+        }}
+        onMouseLeave={(e) => {
+          const target = e.target as HTMLDivElement;
+          target.style.backgroundColor = "#FF7E5F"; // Đổi lại màu ban đầu khi không hover
+        }}
+      >
+        MIA-SKIN
+      </div>
+
       {/* Container Box cho nội dung chính */}
       <div style={{
         position: "relative",
@@ -160,19 +162,19 @@ const App = () => {
         boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
       }}>
         <img
-        src="/textures/page/lp-content-swimming-dog.gif"
-        alt="topLeft Image"
-        style={{
-          position: "absolute",
-          top: "-3%",
-          right: "80%",
-          transform: "translateY(-50%)",
-          zIndex: 0,
-          width: "200px",
-          height: "25%",
-          opacity: 1,
-        }}
-      />
+          src="/textures/page/lp-content-swimming-dog.gif"
+          alt="topLeft Image"
+          style={{
+            position: "absolute",
+            top: "-3%",
+            right: "80%",
+            transform: "translateY(-50%)",
+            zIndex: 0,
+            width: "200px",
+            height: "25%",
+            opacity: 1,
+          }}
+        />
         {/* Tìm kiếm */}
         <div style={{ textAlign: "center", marginBottom: "20px" }}>
           <input
@@ -236,58 +238,28 @@ const App = () => {
               >
                 <ReactSkinview3d
                   skinUrl={url}
-                  width={120}
-                  height={300}
-                  capeUrl={capeEnabled[(currentPage - 1) * imagesPerPage + index] ? "/textures/mojang-classic-cape.png" : ""}
+                  width={150}
+                  height={350}
+                  capeUrl={capeEnabled[index] ? "/textures/cape/1.png" : undefined}
                 />
-                <button
-              onClick={() => toggleCape((currentPage - 1) * imagesPerPage + index)}
-              style={{
-                position: "absolute",
-                top: "10px",
-                left: "10px",
-                backgroundColor: "rgba(0, 0, 0, 0.5)",
-                color: "white",
-                border: "none",
-                padding: "8px",
-                borderRadius: "50%",
-                fontSize: "14px",
-                cursor: "pointer",
-              }}
-            >
-              🌟
-            </button>
-                <a
-                  href={url}
-                  download={`skin-${imageName}.png`}
-                  style={{
-                    marginTop: "10px",
-                    padding: "5px 10px",
-                    backgroundColor: "#4CAF50",
-                    color: "#fff",
-                    textDecoration: "none",
-                    borderRadius: "5px",
-                    fontSize: "14px",
-                    transition: "background-color 0.3s ease",
-                  }}
-                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#45a049"} // Hiệu ứng khi hover lên link
-                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "#4CAF50"}
-                >
-                  Tải xuống
-                </a>
-                <div
-                  style={{
-                    marginTop: "10px",
-                    padding: "5px 10px",
-                    backgroundColor: "#4CAF50",
-                    color: "#fff",
-                    textDecoration: "none",
-                    borderRadius: "5px",
-                    fontSize: "14px",
-                    textAlign: "center",
-                    border: "2px solid #4CAF50",
-                  }}
-                >
+                <div style={{
+                  position: "absolute",
+                  bottom: "0px",
+                  left: "0",
+                  right: "0",
+                  padding: "5px",
+                  textAlign: "center",
+                  backgroundColor: "#FF7E5F",
+                  color: "#fff",
+                  fontWeight: "bold",
+                  borderBottomLeftRadius: "6px",
+                  borderBottomRightRadius: "6px",
+                  transition: "background-color 0.3s ease, transform 0.1s ease", // Thêm hiệu ứng khi hover và click
+                  cursor: "pointer"
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#800080"} // Đổi màu sang tím khi hover
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "#FF7E5F"} // Đổi lại màu ban đầu khi không hover
+                onClick={() => toggleCape(index)}>
                   {imageName}
                 </div>
               </div>
@@ -295,72 +267,20 @@ const App = () => {
           })}
         </div>
 
-        {/* Thanh điều hướng kết hợp với ô nhập số trang */}
-        <div style={{ marginTop: "30px", textAlign: "center" }}>
-          <button
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-            style={{
-              margin: "0 10px",
-              padding: "5px 10px",
-              backgroundColor: "#FF7E5F",
-              color: "white",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-              transition: "background-color 0.3s ease", // Hiệu ứng khi hover nút
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#ff6f61"}
-            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "#FF7E5F"}
-          >
-            Trang Trước
+        {/* Điều khiển trang */}
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: "20px" }}>
+          <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
+            Trang trước
           </button>
-          
-          {/* Thanh số trang và ô nhập */}
           <input
             type="number"
             value={currentPage}
             onChange={handlePageInputChange}
-            min={1}
-            max={totalPages}
-            style={{
-              width: "60px",
-              padding: "5px",
-              textAlign: "center",
-              color: "#a3a2a2",
-              margin: "0 10px",
-              borderRadius: "5px",
-              border: "2px solid #ffb94b",
-              backgroundColor: "#ffffff",
-            }}
+            style={{ width: "40px", margin: "0 10px", textAlign: "center" }}
           />
-
-          <span style={{ margin: "0 5px",color: "#a3a2a2" }}>
-            / {totalPages}
-          </span>
-
-          <button
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
-            style={{
-              margin: "0 10px",
-              padding: "5px 10px",
-              backgroundColor: "#FF7E5F",
-              color: "white",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-              transition: "background-color 0.3s ease",
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#ff6f61"}
-            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "#FF7E5F"}
-          >
-            Trang Sau
+          <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
+            Trang sau
           </button>
-        </div>
-
-        <div style={{ textAlign: "center", marginTop: "20px",color: "#a3a2a2" }}>
-          <span>{`Số lượng Skin: ${totalImages}`} </span>
         </div>
       </div>
     </div>

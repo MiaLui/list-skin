@@ -2,11 +2,13 @@ import ReactSkinview3d from "react-skinview3d";
 import React, { useState } from "react";
 
 const App = () => {
-  const totalImages = 230;
+  const totalImages = 242;
   const imagesPerPage = 8;
+  const current_skin = [];
   const skinUrls = [];
   for (let i = 1; i <= totalImages; i++) {
     skinUrls.push(`/textures/skin/${i}.png`);
+    current_skin.push(i)
   }
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -359,7 +361,7 @@ const App = () => {
         </div>
 
         <div style={{ textAlign: "center", marginTop: "20px",color: "#a3a2a2" }}>
-          <span>{`Số lượng Skin: ${totalImages}`} </span>
+          <span>{`Số lượng Skin: ${Math.max(...current_skin)}`} </span>
         </div>
       </div>
     </div>
